@@ -12,6 +12,9 @@
         <button @click="fetchResult">Set Date</button>
       </div>
     </div>
+    <div>
+      <a href="https://myilmaz.net" target="_blank" @click="refreshPage">myilmaz.net</a>
+    </div>
     <div class="d-flex">
       <div class="chart-container">
         <highcharts class="hc" :options="ttfbData" ref="chart"></highcharts>
@@ -95,6 +98,11 @@ export default {
   },
   methods: {
     ...mapActions(["getResult"]),
+    refreshPage() {
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
+    },
     fetchResult() {
       const startDate = this.startDate ? dayjs(this.startDate).$d : "";
       const endDate = this.endDate ? dayjs(this.endDate).$d : "";
