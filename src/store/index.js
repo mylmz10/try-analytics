@@ -46,9 +46,9 @@ export default new Vuex.Store({
       }
       return fetch(url, options).then(res => res.text());
     },
-    getResult({ dispatch }, { siteUrl }) {
+    getResult({ dispatch }, { siteUrl, startDate, endDate }) {
       return dispatch("request", {
-        url: `${API_URL}/api/getResult?token="token1"&url=${siteUrl}`,
+        url: `${API_URL}/api/getResult?token="token1"&url=${siteUrl}&startDate=${startDate}&endDate=${endDate}`,
       });
     },
   },

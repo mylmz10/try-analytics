@@ -1,7 +1,16 @@
 <template>
   <div class="dashboard">
     <div class="header">
-      {{ siteUrl }}
+      <div class="title">
+        {{ siteUrl }}
+      </div>
+      <div class="date-selector">
+        <span>Start Date:</span>
+        <input type="datetime-local" v-model="startDate" />
+        <span style="margin-left: 1rem">End Date:</span>
+        <input type="datetime-local" v-model="endDate" />
+        <button @click="fetchResult">Set Date</button>
+      </div>
     </div>
     <div class="d-flex">
       <div class="chart-container">
@@ -34,6 +43,8 @@ export default {
   name: "Dashboard",
   data() {
     return {
+      startDate: null,
+      endDate: null,
       analyticsResults: [],
       selectedItemIndex: 0,
       ttfbOptions: {
@@ -47,9 +58,7 @@ export default {
     };
   },
   created() {
-    this.getResult({ siteUrl: this.siteUrl }).then(res => {
-      this.$set(this, "analyticsResults", res.data);
-    });
+    this.fetchResult();
   },
   computed: {
     fcpData() {
@@ -86,6 +95,14 @@ export default {
   },
   methods: {
     ...mapActions(["getResult"]),
+    fetchResult() {
+      const startDate = this.startDate ? dayjs(this.startDate).$d : "";
+      const endDate = this.endDate ? dayjs(this.endDate).$d : "";
+
+      this.getResult({ siteUrl: this.siteUrl, startDate, endDate }).then(res => {
+        this.$set(this, "analyticsResults", res.data);
+      });
+    },
     selectDate(item) {
       this.selectedItemIndex = this.dateList.findIndex(date => date === item.target.value);
     },
@@ -133,7 +150,17 @@ export default {
 .dashboard {
   .header {
     background: #ebebeb;
-    padding: 1rem;
+    padding: 1rem 2.5rem;
+    display: flex;
+
+    .title {
+      flex-grow: 1;
+      text-align: left;
+    }
+
+    .date-selector {
+      font-size: 0.825rem;
+    }
   }
 
   .d-flex {
