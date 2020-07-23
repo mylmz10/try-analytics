@@ -13,7 +13,9 @@
           </tr>
         </template>
         <template v-else>
-          <td :colspan="headers.length" style="padding: 1rem">No Record Found</td>
+          <tr>
+            <td :colspan="headers.length" style="padding: 1rem">No Record Found</td>
+          </tr>
         </template>
       </tbody>
     </table>
