@@ -1,6 +1,8 @@
 # try-analytics
 
-This is Vue based dashboard of try-analytics-tracker rest API (http://try-analytics-tracker.herokuapp.com/). 
+The app (dashboard): http://try-analytics.herokuapp.com
+
+This is Vue based dashboard of try-analytics-tracker rest API (https://github.com/mylmz10/try-analytics-tracker) (http://try-analytics-tracker.herokuapp.com/). 
 
 ## Screenshot
 <div align="center">
